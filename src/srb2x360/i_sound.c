@@ -42,7 +42,7 @@ void I_ShutdownSound(void) { X360_AudioShutdown(); sound_started=0; }
 void I_UpdateSound(void) {}
 INT32 I_StartSound(sfxenum_t id, UINT8 vol, UINT8 sep, UINT8 pitch, UINT8 priority) {
     const UINT8 *p; (void)priority;
-    if (!sound_started || !S_sfx[id].data) return -1;
+    if (!sound_started || id < 0 || id >= NUMSFX || !S_sfx[id].data) return -1;
     p=(const UINT8*)S_sfx[id].data;
     return X360_AudioPlay(p+8,(unsigned int)S_sfx[id].length,rd16(p+2),vol,sep,pitch);
 }

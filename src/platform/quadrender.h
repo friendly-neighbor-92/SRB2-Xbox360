@@ -1,8 +1,9 @@
 #pragma once
 
 // Shared textured-quad renderer.
-const float SCREEN_W = 1280.0f;
-const float SCREEN_H = 720.0f;
+extern float SCREEN_W;
+extern float SCREEN_H;
+void SetQuadScreenSize(float width, float height);
 
 // Vertex
 

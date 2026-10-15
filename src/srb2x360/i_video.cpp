@@ -15,7 +15,7 @@ boolean allow_fullscreen = false;
 UINT8 graphics_started = 0;
 static RGBA_t s_palette[256];
 static D3DTexture *s_frame = NULL;
-static const int kW=640, kH=400;
+static const int kW=1280, kH=720;
 consvar_t cv_vidwait = {"vid_wait", "On", CV_SAVE, CV_OnOff, NULL, 0, NULL, NULL, 0, 0, NULL};
 
 static void EnsureTexture()
@@ -25,7 +25,10 @@ static void EnsureTexture()
         HRESULT hr = g_pd3dDevice->CreateTexture(kW, kH, 1, 0,
         D3DFMT_LIN_A8R8G8B8, 0, &s_frame, NULL);
         if (FAILED(hr) || !s_frame)
-        I_Error("Xbox 360: failed to create linear framebuffer texture (hr=0x%08x)", (unsigned)hr);
+        {
+            s_frame = NULL;
+            I_Error("Xbox 360: failed to create linear framebuffer texture (hr=0x%08x)", (unsigned)hr);
+        }
     }
 }
 
@@ -47,13 +50,22 @@ INT32 VID_NumModes(void){return 1;}
 INT32 VID_GetModeForSize(INT32 w,INT32 h){(void)w;(void)h;return 0;}
 void VID_PrepareModeList(void){}
 INT32 VID_SetMode(INT32 m){(void)m; if(!graphics_started) I_StartupGraphics(); vid.recalc=true; return 1;}
-const char *VID_GetModeName(INT32 m){(void)m;return "640x400";}
+const char *VID_GetModeName(INT32 m){(void)m;return "1280x720";}
 void I_UpdateNoBlit(void){}
 
 static void PresentSoftwareFrame()
 {
     if(!graphics_started || !vid.buffer || !g_pd3dDevice) return;
     EnsureTexture(); if(!s_frame) return;
+
+    /* Keep the software framebuffer dimensions consistent with the upload. */
+    if (vid.width != kW || vid.height != kH || vid.rowbytes < kW)
+    {
+        I_Error("Xbox 360: unsupported framebuffer geometry %dx%d rowbytes=%d",
+            vid.width, vid.height, vid.rowbytes);
+        return;
+    }
+
     D3DLOCKED_RECT lr;
     HRESULT lockResult = s_frame->LockRect(0, &lr, NULL, 0);
     if (SUCCEEDED(lockResult)) {
@@ -64,7 +76,7 @@ static void PresentSoftwareFrame()
         }
         for(int y=0;y<kH;y++) {
             DWORD *dst=(DWORD*)((BYTE*)lr.pBits + y*lr.Pitch);
-            const UINT8 *src=vid.buffer + y*vid.rowbytes;
+            const UINT8 *src=vid.buffer + (size_t)y*vid.rowbytes;
             for(int x=0;x<kW;x++) {
                 RGBA_t c=s_palette[src[x]];
                 dst[x]=0xff000000u | ((DWORD)c.s.red<<16) | ((DWORD)c.s.green<<8) | (DWORD)c.s.blue;
@@ -76,7 +88,7 @@ static void PresentSoftwareFrame()
         return;
     }
     BeginFrame(0xff000000);
-    DrawTexturedQuad(g_pd3dDevice,s_frame,640.0f,360.0f,576.0f,360.0f,0.0f);
+    DrawTexturedQuad(g_pd3dDevice,s_frame,SCREEN_W*0.5f,SCREEN_H*0.5f,SCREEN_W*0.5f,SCREEN_H*0.5f,0.0f);
     EndFrame();
 }
 void I_FinishUpdate(void){PresentSoftwareFrame();}

@@ -7,6 +7,17 @@
 D3DVertexDeclaration* g_pQuadDecl = NULL;
 D3DVertexShader*      g_pQuadVS   = NULL;
 D3DPixelShader*       g_pQuadPS   = NULL;
+float SCREEN_W = 1280.0f;
+float SCREEN_H = 720.0f;
+
+void SetQuadScreenSize(float width, float height)
+{
+    if (width > 0.0f && height > 0.0f)
+    {
+        SCREEN_W = width;
+        SCREEN_H = height;
+    }
+}
 
 static const char* s_QuadVS =
 " struct VS_IN  "

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "renderer.h"
+#include "../platform/quadrender.h"
 
 D3DDevice* g_pd3dDevice  = NULL;
 BOOL       g_bWidescreen = TRUE;
@@ -17,8 +18,10 @@ HRESULT InitD3D()
     XGetVideoMode( &VideoMode );
     g_bWidescreen = VideoMode.fIsWideScreen;
 
-    d3dpp.BackBufferWidth        = min( (int)VideoMode.dwDisplayWidth,  1280 );
-    d3dpp.BackBufferHeight       = min( (int)VideoMode.dwDisplayHeight,  720 );
+    UINT displayWidth = VideoMode.dwDisplayWidth ? VideoMode.dwDisplayWidth : 1280;
+    UINT displayHeight = VideoMode.dwDisplayHeight ? VideoMode.dwDisplayHeight : 720;
+    d3dpp.BackBufferWidth = min((int)displayWidth, 1280);
+    d3dpp.BackBufferHeight = min((int)displayHeight, 720);
     d3dpp.BackBufferFormat       = D3DFMT_X8R8G8B8;
     d3dpp.BackBufferCount        = 1;
     d3dpp.EnableAutoDepthStencil = TRUE;
@@ -26,11 +29,23 @@ HRESULT InitD3D()
     d3dpp.SwapEffect             = D3DSWAPEFFECT_DISCARD;
     d3dpp.PresentationInterval   = D3DPRESENT_INTERVAL_ONE;
 
-    if( FAILED( pD3D->CreateDevice( 0, D3DDEVTYPE_HAL, NULL,
+    HRESULT hr = pD3D->CreateDevice( 0, D3DDEVTYPE_HAL, NULL,
     D3DCREATE_HARDWARE_VERTEXPROCESSING,
-    &d3dpp, &g_pd3dDevice ) ) )
-    return E_FAIL;
+    &d3dpp, &g_pd3dDevice );
 
+    pD3D->Release();
+
+    if (FAILED(hr))
+    {
+        if (g_pd3dDevice)
+        {
+            g_pd3dDevice->Release();
+            g_pd3dDevice = NULL;
+        }
+        return hr;
+    }
+
+    SetQuadScreenSize((float)d3dpp.BackBufferWidth, (float)d3dpp.BackBufferHeight);
     return S_OK;
 }
 

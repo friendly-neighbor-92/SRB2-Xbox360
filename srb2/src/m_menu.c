@@ -2330,9 +2330,11 @@ void M_Drawer(void)
 	if (!menuactive)
 		return;
 
+#if !defined(_XBOX360)
 	// now that's more readable with a faded background (yeah like Quake...)
 	if (!WipeInAction)
 		V_DrawFadeScreen();
+#endif
 
 	if (currentMenu->drawroutine)
 		currentMenu->drawroutine(); // call current menu Draw routine

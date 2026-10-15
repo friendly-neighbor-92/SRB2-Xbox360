@@ -3,7 +3,7 @@
 extern D3DDevice* g_pd3dDevice;
 extern BOOL       g_bWidescreen;
 
-HRESULT InitD3D();                     // device, 1280x720, D24S8
+HRESULT InitD3D();                     // device, display resolution up to 720p
 void    BeginFrame( DWORD clearColor ); // Clear + default state
 void    EndFrame();                    // Present
 

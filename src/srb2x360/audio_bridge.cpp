@@ -43,6 +43,7 @@ static void destroySlot(int i) {
     if (slots[i].voice) { slots[i].voice->Stop(0); slots[i].voice->FlushSourceBuffers(); slots[i].voice->DestroyVoice(); }
     slots[i].voice = NULL; slots[i].voiceRate = 0; slots[i].active = 0;
     slots[i].data = NULL; slots[i].serial = 0;
+    slots[i].lastVol = slots[i].lastPan = slots[i].lastPitch = -1;
 }
 static void parameters(int i, unsigned char vol, unsigned char pan, unsigned char pitch, int force) {
     if (!force && slots[i].lastVol == vol && slots[i].lastPan == pan && slots[i].lastPitch == pitch) return;
@@ -78,6 +79,7 @@ extern "C" int X360_AudioInit(void) {
     XAUDIO2_VOICE_DETAILS details; ZeroMemory(&details, sizeof(details));
     master->GetVoiceDetails(&details);
     masterChannels = details.InputChannels ? details.InputChannels : 2;
+    if (masterChannels > 8) masterChannels = 8;
     {
         char b[96]; sprintf(b, "SRB2 AUDIO: mastering voice has %u channels\n", masterChannels);
         OutputDebugStringA(b);
