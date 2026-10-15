@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Xbox 360">
+      <Configuration>Debug</Configuration>
+      <Platform>Xbox 360</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Xbox 360">
+      <Configuration>Release</Configuration>
+      <Platform>Xbox 360</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A73D6621-6C7A-4A4C-9F54-2160360B2160}</ProjectGuid>
+    <Keyword>Xbox360Proj</Keyword>
+    <RootNamespace>SRB2Xbox360</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Xbox 360'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Xbox 360'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)srb2\src;$(ProjectDir)src;$(ProjectDir)src\platform;$(ProjectDir)src\render;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_XBOX;_XBOX360;_BIG_ENDIAN;WORDS_BIGENDIAN;HAVE_BLUA;NOMUMBLE;NONET;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>xapilibd.lib;d3d9d.lib;d3dx9d.lib;xgraphicsd.lib;xboxkrnl.lib;xnetd.lib;xaudiod2.lib;xbdm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)srb2\src;$(ProjectDir)src;$(ProjectDir)src\platform;$(ProjectDir)src\render;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;_XBOX;_XBOX360;_BIG_ENDIAN;WORDS_BIGENDIAN;HAVE_BLUA;NOMUMBLE;NONET;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>xapilibi.lib;d3d9.lib;d3dx9.lib;xgraphics.lib;xboxkrnl.lib;xnet.lib;xaudio2.lib;xmcore.lib;xbdm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="srb2\src\am_map.c" />
+    <ClCompile Include="srb2\src\b_bot.c" />
+    <ClCompile Include="srb2\src\blua\lapi.c" />
+    <ClCompile Include="srb2\src\blua\lauxlib.c" />
+    <ClCompile Include="srb2\src\blua\lbaselib.c" />
+    <ClCompile Include="srb2\src\blua\lcode.c" />
+    <ClCompile Include="srb2\src\blua\ldebug.c" />
+    <ClCompile Include="srb2\src\blua\ldo.c" />
+    <ClCompile Include="srb2\src\blua\ldump.c" />
+    <ClCompile Include="srb2\src\blua\lfunc.c" />
+    <ClCompile Include="srb2\src\blua\lgc.c" />
+    <ClCompile Include="srb2\src\blua\linit.c" />
+    <ClCompile Include="srb2\src\blua\llex.c" />
+    <ClCompile Include="srb2\src\blua\lmem.c" />
+    <ClCompile Include="srb2\src\blua\lobject.c" />
+    <ClCompile Include="srb2\src\blua\lopcodes.c" />
+    <ClCompile Include="srb2\src\blua\lparser.c" />
+    <ClCompile Include="srb2\src\blua\lstate.c" />
+    <ClCompile Include="srb2\src\blua\lstring.c" />
+    <ClCompile Include="srb2\src\blua\lstrlib.c" />
+    <ClCompile Include="srb2\src\blua\ltable.c" />
+    <ClCompile Include="srb2\src\blua\ltablib.c" />
+    <ClCompile Include="srb2\src\blua\ltm.c" />
+    <ClCompile Include="srb2\src\blua\lundump.c" />
+    <ClCompile Include="srb2\src\blua\lvm.c" />
+    <ClCompile Include="srb2\src\blua\lzio.c" />
+    <ClCompile Include="srb2\src\command.c" />
+    <ClCompile Include="srb2\src\comptime.c" />
+    <ClCompile Include="srb2\src\console.c" />
+    <ClCompile Include="srb2\src\d_clisrv.c" />
+    <ClCompile Include="srb2\src\d_main.c" />
+    <ClCompile Include="srb2\src\d_net.c" />
+    <ClCompile Include="srb2\src\d_netcmd.c" />
+    <ClCompile Include="srb2\src\d_netfil.c" />
+    <ClCompile Include="srb2\src\dehacked.c" />
+    <ClCompile Include="srb2\src\f_finale.c" />
+    <ClCompile Include="srb2\src\f_wipe.c" />
+    <ClCompile Include="srb2\src\filesrch.c" />
+    <ClCompile Include="srb2\src\g_game.c" />
+    <ClCompile Include="srb2\src\g_input.c" />
+    <ClCompile Include="srb2\src\hu_stuff.c" />
+    <ClCompile Include="srb2\src\info.c" />
+    <ClCompile Include="srb2\src\lzf.c" />
+    <ClCompile Include="srb2\src\m_argv.c" />
+    <ClCompile Include="srb2\src\m_bbox.c" />
+    <ClCompile Include="srb2\src\m_cheat.c" />
+    <ClCompile Include="srb2\src\m_cond.c" />
+    <ClCompile Include="srb2\src\m_fixed.c" />
+    <ClCompile Include="srb2\src\m_menu.c" />
+    <ClCompile Include="srb2\src\m_misc.c" />
+    <ClCompile Include="srb2\src\m_queue.c" />
+    <ClCompile Include="srb2\src\m_random.c" />
+    <ClCompile Include="srb2\src\md5.c" />
+    <ClCompile Include="srb2\src\mserv.c" />
+    <ClCompile Include="srb2\src\p_ceilng.c" />
+    <ClCompile Include="srb2\src\p_enemy.c" />
+    <ClCompile Include="srb2\src\p_fab.c" />
+    <ClCompile Include="srb2\src\p_floor.c" />
+    <ClCompile Include="srb2\src\p_inter.c" />
+    <ClCompile Include="srb2\src\p_lights.c" />
+    <ClCompile Include="srb2\src\p_map.c" />
+    <ClCompile Include="srb2\src\p_maputl.c" />
+    <ClCompile Include="srb2\src\p_mobj.c" />
+    <ClCompile Include="srb2\src\p_polyobj.c" />
+    <ClCompile Include="srb2\src\p_saveg.c" />
+    <ClCompile Include="srb2\src\p_setup.c" />
+    <ClCompile Include="srb2\src\p_sight.c" />
+    <ClCompile Include="srb2\src\p_spec.c" />
+    <ClCompile Include="srb2\src\p_telept.c" />
+    <ClCompile Include="srb2\src\p_tick.c" />
+    <ClCompile Include="srb2\src\p_user.c" />
+    <ClCompile Include="srb2\src\r_bsp.c" />
+    <ClCompile Include="srb2\src\r_data.c" />
+    <ClCompile Include="srb2\src\r_draw.c" />
+    <ClCompile Include="srb2\src\r_main.c" />
+    <ClCompile Include="srb2\src\r_plane.c" />
+    <ClCompile Include="srb2\src\r_segs.c" />
+    <ClCompile Include="srb2\src\r_sky.c" />
+    <ClCompile Include="srb2\src\r_splats.c" />
+    <ClCompile Include="srb2\src\r_things.c" />
+    <ClCompile Include="srb2\src\s_sound.c" />
+    <ClCompile Include="srb2\src\screen.c" />
+    <ClCompile Include="srb2\src\sounds.c" />
+    <ClCompile Include="srb2\src\st_stuff.c" />
+    <ClCompile Include="srb2\src\string.c" />
+    <ClCompile Include="srb2\src\tables.c" />
+    <ClCompile Include="srb2\src\v_video.c" />
+    <ClCompile Include="srb2\src\w_wad.c" />
+    <ClCompile Include="srb2\src\y_inter.c" />
+    <ClCompile Include="srb2\src\z_zone.c" />
+    <ClCompile Include="src\srb2x360\audio_bridge.cpp"><CompileAs>CompileAsCpp</CompileAs></ClCompile>
+    <ClCompile Include="src\srb2x360\music_bridge.cpp"><CompileAs>CompileAsCpp</CompileAs></ClCompile>
+    <ClCompile Include="src\srb2x360\i_main.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\srb2x360\i_video.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\srb2x360\fatal_screen.cpp"><CompileAs>CompileAsCpp</CompileAs></ClCompile>
+    <ClCompile Include="src\srb2x360\i_system.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\srb2x360\i_sound.c" />
+    <ClCompile Include="src\srb2x360\i_net.c" />
+    <ClCompile Include="src\srb2x360\i_cdmus.c" />
+    <ClCompile Include="src\platform\quadrender.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\render\renderer.cpp">
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+  <ClCompile Include="srb2\src\lua_baselib.c" /><ClCompile Include="srb2\src\lua_consolelib.c" /><ClCompile Include="srb2\src\lua_hooklib.c" /><ClCompile Include="srb2\src\lua_hudlib.c" /><ClCompile Include="srb2\src\lua_infolib.c" /><ClCompile Include="srb2\src\lua_maplib.c" /><ClCompile Include="srb2\src\lua_mathlib.c" /><ClCompile Include="srb2\src\lua_mobjlib.c" /><ClCompile Include="srb2\src\lua_playerlib.c" /><ClCompile Include="srb2\src\lua_script.c" /><ClCompile Include="srb2\src\lua_skinlib.c" /><ClCompile Include="srb2\src\lua_thinkerlib.c" /><ClCompile Include="srb2\src\m_anigif.c" /></ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

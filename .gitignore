@@ -1,0 +1,14 @@
+
+
+# Local build output
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.pdb
+*.ilk
+*.idb
+*.log
+Thumbs.db
+.DS_Store

@@ -1,0 +1,16 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "SRB2-Xbox360", "SRB2-Xbox360.vcxproj", "{A73D6621-6C7A-4A4C-9F54-2160360B2160}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Xbox 360 = Debug|Xbox 360
+		Release|Xbox 360 = Release|Xbox 360
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A73D6621-6C7A-4A4C-9F54-2160360B2160}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{A73D6621-6C7A-4A4C-9F54-2160360B2160}.Debug|Xbox 360.Build.0 = Debug|Xbox 360
+		{A73D6621-6C7A-4A4C-9F54-2160360B2160}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+		{A73D6621-6C7A-4A4C-9F54-2160360B2160}.Release|Xbox 360.Build.0 = Release|Xbox 360
+	EndGlobalSection
+EndGlobal
