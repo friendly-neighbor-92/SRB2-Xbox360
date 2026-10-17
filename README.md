@@ -1,5 +1,7 @@
 # SRB2 2.1.6 Xbox 360
 
+I had no input making this port whatsoever, I prompted an AI.
+
 ## License and notices
 
 The SRB2-derived code in this project is distributed under the **GNU General Public License, version 2 (GPL-2.0)**, subject to the applicable notices and terms. Read [`SRB2_LICENSE.txt`](SRB2_LICENSE.txt) and preserve the copyright and license notices in the source tree.
